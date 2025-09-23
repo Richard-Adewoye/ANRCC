@@ -4,104 +4,26 @@ import { FaTwitter as FaXTwitter, FaLinkedinIn, FaFacebookF, FaInstagram, FaYout
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-12">
-      {/* Top Section */}
-      <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-        <FooterColumn
-          title="GET STARTED"
-          links={[
-            { label: "Contact Us", href: "/contact" },
-            { label: "Get a Quote", href: "/quote" },
-            { label: "Request a Demo", href: "/demo" },
-          ]}
-        />
-        <FooterColumn
-          title="MAXAR INTELLIGENCE"
-          links={[
-            { label: "Overview", href: "/intelligence" },
-            { label: "Products", href: "/products" },
-            { label: "Solutions", href: "/solutions" },
-          ]}
-        />
-        <FooterColumn
-          title="MAXAR SPACE SYSTEMS"
-          links={[
-            { label: "Overview", href: "/space" },
-            { label: "Satellites", href: "/space/satellites" },
-            { label: "Robotics", href: "/space/robotics" },
-          ]}
-        />
-        <FooterColumn
-          title="LEGAL"
-          links={[
-            { label: "Privacy Policy", href: "/privacy" },
-            { label: "Terms of Use", href: "/terms" },
-            { label: "Cookie Policy", href: "/cookies" },
-          ]}
-        />
-        <FooterColumn
-          title="EXPLORE"
-          links={[
-            { label: "Careers", href: "/careers" },
-            { label: "News", href: "/news" },
-            { label: "Events", href: "/events" },
-          ]}
-        />
-      </div>
+    <footer className="bg-black text-green-200 py-6">
+      <div className="max-w-screen-xl mx-auto px-6 text-center space-y-2">
+        <p className="text-sm">
+          <strong>Headquarters:</strong> 26 Old Lamingo Road, Nabor, Jos, Plateau State.
+        </p>
+        <p className="text-sm">
+          <strong>Phone:</strong> +234 80 69420 985
+        </p>
+        <p className="text-sm">
+          <strong>Email:</strong> <Link href="mailto:info@anrccc.com" className="hover:text-green-400">info@anrccc.com</Link>
+        </p>
+        <p className="text-sm">
+          <strong>Website:</strong> <Link href="https://www.anrccc.com" className="hover:text-green-400">www.anrccc.com</Link>
+        </p>
 
-      {/* Divider */}
-      <div className="border-t border-cyan-500 my-8"></div>
-
-      {/* Bottom Section */}
-      <div className="max-w-screen-xl mx-auto px-6 flex flex-col items-center space-y-4 pb-8">
-        {/* Social Icons */}
-        <div className="flex space-x-3">
-          <SocialIcon href="https://twitter.com" icon={<FaXTwitter />} />
-          <SocialIcon href="https://linkedin.com" icon={<FaLinkedinIn />} />
-          <SocialIcon href="https://facebook.com" icon={<FaFacebookF />} />
-          <SocialIcon href="https://instagram.com" icon={<FaInstagram />} />
-          <SocialIcon href="https://youtube.com" icon={<FaYoutube />} />
-        </div>
-
-        {/* Copyright */}
-        <p className="text-sm text-gray-400 text-center">
-          © {new Date().getFullYear()} Maxar Technologies.{" "}
-          <Link href="/privacy" className="hover:text-white">
-            Privacy Policy
-          </Link>{" "}
-          |{" "}
-          <Link href="/terms" className="hover:text-white">
-            Website Terms of Use
-          </Link>
+        <p className="text-xs mt-2">
+          © {new Date().getFullYear()} ANRCCC. All rights reserved.
         </p>
       </div>
     </footer>
-  );
-}
-
-function FooterColumn({
-  title,
-  links,
-}: {
-  title: string;
-  links: { label: string; href: string }[];
-}) {
-  return (
-    <div>
-      <h4 className="uppercase font-bold text-sm mb-4">{title}</h4>
-      <ul className="space-y-2">
-        {links.map((link, idx) => (
-          <li key={idx}>
-            <Link
-              href={link.href}
-              className="hover:text-white transition-colors duration-200"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
@@ -111,7 +33,7 @@ function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 flex items-center justify-center bg-gray-800 text-white rounded hover:bg-cyan-500 transition"
+      className="w-8 h-8 flex items-center justify-center bg-green-800 text-green-200 rounded hover:bg-green-700 transition"
     >
       {icon}
     </Link>

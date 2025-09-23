@@ -1,36 +1,38 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 
 const tabs = [
   {
-    id: "southern-california",
-    label: "Southern California",
-    category: "GOVERNMENT",
-    title: "Southern California transforms regional planning",
+    id: "coastal-flood-management",
+    label: "Forest Conservation and REDD+ Implementation",
+    category: "ANRCCC",
+    title: "Forest Conservation and REDD+ Initiatives",
     description:
-      "The Southern California Association of Governments is using Esri technology to revolutionize how the region plans and manages growth, improving sustainability and infrastructure.",
+      "ANRCCC has partnered with governments and international organizations to design and implement REDD+ programs, focusing on reducing deforestation and forest degradation in key biodiversity hotspots.",
     link: "/case-studies/southern-california",
-    images: ["/img1.jpg", "/img2.jpg", "/img3.jpg"], // placeholder paths
+    images: ["images/img_1.webp", "images/img_2.webp", "images/img_3.jpg"],
   },
   {
-    id: "the-joint",
-    label: "The Joint",
-    category: "BUSINESS",
-    title: "The Joint drives smarter retail expansion",
+    id: "sustainable-agriculture",
+    label: "Climate Resilient Agriculture in Sub-Saharan Africa",
+    category: "ANRCCC",
+    title: "Climate-Smart Agriculture for Smallholder Farmers",
     description:
-      "By leveraging Esri's mapping capabilities, The Joint Chiropractic has optimized location selection, ensuring better access for their customers nationwide.",
+      "The firm has led efforts to promote climate-smart agricultural practices that increase productivity while building resilience to climate change for smallholder farmers.",
     link: "/case-studies/the-joint",
-    images: ["/img4.jpg", "/img5.jpg", "/img6.jpg"],
+    images: ["images/img_4.jpg", "images/img_5.jpg", "images/img_6.jpg"],
   },
   {
-    id: "wrexham-stadium",
-    label: "Wrexham stadium",
-    category: "SPORTS",
-    title: "Wrexham stadium enhances fan experience",
+    id: "solar-energy-optimization",
+    label: "Integrated Water Resource Management in West Africa",
+    category: "ANRCCC",
+    title: "Integrated Water Resource Management",
     description:
-      "Using Esri technology, Wrexham stadium has improved crowd management and engagement through real-time spatial analytics.",
+      "ANRCCC has worked on comprehensive water management plans that balance the needs of agricultural, urban, and industrial sectors while ensuring the sustainability of water resources.",
     link: "/case-studies/wrexham-stadium",
-    images: ["/img7.jpg", "/img8.jpg", "/img9.jpg"],
+    images: ["images/img_7.jpg", "images/img_8.jpg", "images/img_9.jpg"],
   },
 ];
 
@@ -38,27 +40,26 @@ export default function CaseStudiesSection() {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
-    <section className="bg-gray-50 py-16 px-4">
+    <section id="projects" className="bg-[#1D1D1D] text-white py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Who uses Esri technology?
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-green-200">
+          Approach
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-          Organizations around the world rely on Esri’s powerful mapping and
-          spatial analytics to transform their operations and decision-making.
+        <p className="text-green-400 max-w-2xl mx-auto mb-8">
+          ANRCCC’s approach is rooted in collaboration, innovation, and sustainability. The firm works closely with stakeholders across Africa to co-create solutions that are locally relevant, culturally appropriate, and environmentally sustainable. By integrating scientific research, traditional knowledge, and advanced technology, ANRCCC ensures that its solutions are both effective and scalable.
         </p>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-6 border-b border-gray-200 mb-10">
+        <div className="flex flex-wrap justify-center gap-6 border-b border-green-700 mb-10">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab)}
               className={`pb-2 transition-colors ${
                 activeTab.id === tab.id
-                  ? "font-semibold text-blue-600 border-b-2 border-blue-600"
-                  : "text-gray-600 hover:text-blue-500"
+                  ? "font-semibold text-green-300 border-b-2 border-green-300"
+                  : "text-green-400 hover:text-green-200"
               }`}
             >
               {tab.label}
@@ -88,25 +89,19 @@ function TabContent({ tab }: { tab: Tab }) {
             className="w-1/3 object-cover rounded-lg"
           />
         ))}
-        {/* Play Button Overlay */}
-        <button className="absolute inset-0 flex items-center justify-center">
-          <span className="bg-black bg-opacity-50 text-white rounded-full p-4">
-            ▶
-          </span>
-        </button>
-      </div>
+        </div>
 
       {/* Right Column - Text Content */}
       <div>
-        <span className="text-xs uppercase text-gray-500">{tab.category}</span>
-        <h3 className="text-2xl font-bold mt-2 mb-4">{tab.title}</h3>
-        <p className="text-gray-600 mb-6">{tab.description}</p>
+        <span className="text-xs uppercase text-green-400">{tab.category}</span>
+        <h3 className="text-2xl font-bold mt-2 mb-4 text-green-200">{tab.title}</h3>
+        <p className="text-green-300 mb-6">{tab.description}</p>
         <Link
-  href={tab.link}
-  className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-md hover:bg-blue-700 transition"
->
-  Read the full case study →
-</Link>
+          href={tab.link}
+          className="inline-flex items-center gap-2 bg-green-400 text-[#1D1D1D] px-5 py-3 rounded-md hover:bg-green-500 transition font-semibold"
+        >
+          Read the full case study →
+        </Link>
       </div>
     </div>
   );

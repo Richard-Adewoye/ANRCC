@@ -1,65 +1,79 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ArrowRight, Play, Pause } from "lucide-react";
+import { Montserrat } from "next/font/google";
+
+// Import Montserrat font
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const lines = [
+  "Afrique Natural Resource and Climate Change Consulting (ANRCCC) is a premier environmental consulting firm based in Africa, specializing in the sustainable management of natural resources and climate change solutions. The company is dedicated to helping governments, businesses, non-governmental organizations (NGOs), and communities address the complex challenges posed by environmental degradation, climate change, and the sustainable use of natural resources. ANRCCC combines cutting-edge research, innovative technologies, and a deep understanding of local ecosystems to deliver customized solutions that promote sustainable development.",
+];
 
 export default function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentLine, setCurrentLine] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
 
-  const togglePlayPause = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
+  useEffect(() => {
+    if (currentLine < lines.length) {
+      let i = 0;
+      const typing = setInterval(() => {
+        if (i < lines[currentLine].length) {
+          setDisplayedText((prev) => prev + lines[currentLine][i]);
+          i++;
+        } else {
+          clearInterval(typing);
+          setTimeout(() => {
+            setCurrentLine((prev) => prev + 1);
+            setDisplayedText("");
+          }, 1500);
+        }
+      }, 0.1);
+      return () => clearInterval(typing);
     }
-    setIsPlaying(!isPlaying);
-  };
+  }, [currentLine]);
 
   return (
-    <section className="w-full min-h-screen flex flex-col md:flex-row">
-      {/* Left Column */}
-      <div className="bg-gray-900 text-white flex flex-col justify-center px-8 py-16 md:w-1/2">
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-          ArcGIS: Esri&apos;s comprehensive geospatial platform
+    <section
+      className={`relative w-full min-h-screen flex items-center overflow-hidden ${montserrat.className}`}
+    >
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/videos/vid_3.mp4" // <-- place video inside /public/videos/bg.mp4
+        autoPlay
+        loop
+        muted
+        playsInline
+      ></video>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Glassmorphic Box */}
+      <div className="relative flex flex-col justify-center m-4 p-16 w-[calc(100%-32px)] h-[calc(100%-32px)] bg-white/10 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl z-10">
+        <h1 className="text-5xl md:text-6xl font-bold mb-8 text-white leading-tight">
+          Afrique Natural Resource and Climate Change Consulting
         </h1>
-        <p className="text-lg text-gray-300 mb-8">
-          Unlock the power of location with ArcGIS, the world’s leading mapping and spatial analysis software.
+
+        {/* Typing Effect */}
+        <p className="text-lg text-white whitespace-pre-line min-h-[6rem] mb-8">
+          {lines.slice(0, currentLine).join("\n")}
+          {displayedText}
         </p>
+
         <Link
-          href="/arcgis"
-          className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+          href="#about"
+          className="inline-flex items-center bg-green-700 hover:bg-green-600 text-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors text-lg"
         >
-          Learn about ArcGIS
-          <ArrowRight className="ml-2 w-5 h-5" />
+          Learn about Us
+          <ArrowRight className="ml-2 w-6 h-6" />
         </Link>
-      </div>
-
-      {/* Right Column */}
-      <div className="relative md:w-1/2 h-64 md:h-auto">
-        {/* Video Background */}
-        <video
-          ref={videoRef}
-          src="/videos/vid_1.mp4" // replace with your video path
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        />
-
-        {/* Semi-transparent orange circle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500 opacity-40 rounded-full pointer-events-none"></div>
-
-        {/* Play/Pause Button */}
-        <button
-          onClick={togglePlayPause}
-          className="absolute top-4 right-4 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition"
-        >
-          {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-        </button>
       </div>
     </section>
   );
