@@ -16,7 +16,7 @@ export default function Footer() {
           <strong>Email:</strong> <Link href="mailto:info@anrccc.com" className="hover:text-green-400">info@anrccc.com</Link>
         </p>
         <p className="text-sm">
-          <strong>Website:</strong> <Link href="https://www.anrccc.com" className="hover:text-green-400">www.anrccc.com</Link>
+          <strong>Website:</strong> <Link href="https://www.anrccc.com" className="hover:text-green-400">www.anrccc.com.ng</Link>
         </p>
 
         <p className="text-xs mt-2">
