@@ -96,13 +96,7 @@ function TabContent({ tab }: { tab: Tab }) {
         <span className="text-xs uppercase text-green-400">{tab.category}</span>
         <h3 className="text-2xl font-bold mt-2 mb-4 text-green-200">{tab.title}</h3>
         <p className="text-green-300 mb-6">{tab.description}</p>
-        {/*<Link
-          href={tab.link}
-          className="inline-flex items-center gap-2 bg-green-400 text-[#1D1D1D] px-5 py-3 rounded-md hover:bg-green-500 transition font-semibold"
-        >
-          Read the full case study →
-        </Link> 
-        */}
+        
       </div>
     </div>
   );
