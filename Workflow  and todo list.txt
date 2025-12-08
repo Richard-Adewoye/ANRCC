@@ -1,0 +1,8 @@
+To-do
+1. Remove Contact Us(from Navbar) --> Done
+2. link from three images in to developed pages---> Done
+3. Change pictures for our team --> Done
+4. Dropdown for Services page ---> Done
+5. Point Navbar element to parts of the landing page for (About and Projects) --> Done
+6. Develop single section page for 6 dropdown elements --> Done
+7. Remove icons that aren't for the Navbar and change the company logo --> Done
