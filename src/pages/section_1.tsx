@@ -22,6 +22,7 @@ export default function HeroSection() {
   useEffect(() => {
     if (currentLine < lines.length) {
       let i = 0;
+
       const typing = setInterval(() => {
         if (i < lines[currentLine].length) {
           setDisplayedText((prev) => prev + lines[currentLine][i]);
@@ -33,7 +34,8 @@ export default function HeroSection() {
             setDisplayedText("");
           }, 1500);
         }
-      }, 0.1);
+      }, 20); // sane typing speed
+
       return () => clearInterval(typing);
     }
   }, [currentLine]);
@@ -42,15 +44,11 @@ export default function HeroSection() {
     <section
       className={`relative w-full min-h-screen flex items-center overflow-hidden ${montserrat.className}`}
     >
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/videos/vid_3.mp4" // <-- place video inside /public/videos/bg.mp4
-        autoPlay
-        loop
-        muted
-        playsInline
-      ></video>
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+      ></div>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
