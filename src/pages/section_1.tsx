@@ -5,74 +5,128 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
 
-// Import Montserrat font
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const lines = [
-  "Afrique Natural Resource and Climate Change Consulting (ANRCCC) is a premier environmental consulting firm based in Africa, specializing in the sustainable management of natural resources and climate change solutions. The company is dedicated to helping governments, businesses, non-governmental organizations (NGOs), and communities address the complex challenges posed by environmental degradation, climate change, and the sustainable use of natural resources. ANRCCC combines cutting-edge research, innovative technologies, and a deep understanding of local ecosystems to deliver customized solutions that promote sustainable development.",
+interface Slide {
+  image: string;
+  headline: string;
+  subHeadline: string;
+}
+
+const slides: Slide[] = [
+  {
+    image: "/images/hero-1.jpg",
+    headline: "We Build Climate Solutions That Last",
+    subHeadline:
+      "ANRCCC is a leading environmental consulting firm in Africa, specializing in climate change strategy, sustainable resource management, and real-world impact.",
+  },
+  {
+    image: "/images/hero-2.jpg",
+    headline: "Sustainable Development, Built Right",
+    subHeadline:
+      "We help governments, businesses, NGOs, and communities design climate-resilient plans backed by research, innovation, and local ecosystem expertise.",
+  },
+  {
+    image: "/images/hero-3.jpg",
+    headline: "Turning Data Into Action",
+    subHeadline:
+      "We use cutting-edge tools and practical strategies to turn environmental data into actionable solutions that protect communities and ecosystems.",
+  },
 ];
 
-export default function HeroSection() {
-  const [currentLine, setCurrentLine] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
+export default function HeroCarousel() {
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (currentLine < lines.length) {
-      let i = 0;
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % slides.length);
+    }, 8000);
 
-      const typing = setInterval(() => {
-        if (i < lines[currentLine].length) {
-          setDisplayedText((prev) => prev + lines[currentLine][i]);
-          i++;
-        } else {
-          clearInterval(typing);
-          setTimeout(() => {
-            setCurrentLine((prev) => prev + 1);
-            setDisplayedText("");
-          }, 1500);
-        }
-      }, 20); // sane typing speed
-
-      return () => clearInterval(typing);
-    }
-  }, [currentLine]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
       className={`relative w-full min-h-screen flex items-center overflow-hidden ${montserrat.className}`}
     >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-      ></div>
-
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
-
-      {/* Glassmorphic Box */}
-      <div className="relative flex flex-col justify-center m-4 p-16 w-[calc(100%-32px)] h-[calc(100%-32px)] bg-white/10 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl z-10">
-        <h1 className="text-5xl md:text-6xl font-bold mb-8 text-white leading-tight">
-          Afrique Natural Resource and Climate Change Consulting
-        </h1>
-
-        {/* Typing Effect */}
-        <p className="text-lg text-white whitespace-pre-line min-h-[6rem] mb-8">
-          {lines.slice(0, currentLine).join("\n")}
-          {displayedText}
-        </p>
-
-        <Link
-          href="#about"
-          className="inline-flex items-center bg-green-700 hover:bg-green-600 text-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors text-lg"
-        >
-          Learn about Us
-          <ArrowRight className="ml-2 w-6 h-6" />
-        </Link>
+      {slides.map((slide, index) => (
+        <BackgroundImage 
+          key={index} 
+          image={slide.image} 
+          isActive={index === active}
+        />
+      ))}
+      <DarkOverlay />
+      
+      <div className="relative flex flex-col justify-end items-start m-4 p-4 pb-20 w-[calc(100%-32px)] h-[calc(100%-32px)] z-10">
+        <HeroText headline={slides[active].headline} subHeadline={slides[active].subHeadline} />
+        <LearnMoreButton />
       </div>
+
+      <SlideIndicators active={active} total={slides.length} onSelect={setActive} />
     </section>
+  );
+}
+
+function BackgroundImage({ image, isActive }: { image: string; isActive: boolean }) {
+  return (
+    <div
+      className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out ${
+        isActive ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{ backgroundImage: `url(${image})` }}
+    />
+  );
+}
+
+function DarkOverlay() {
+  return <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />;
+}
+
+function HeroText({ headline, subHeadline }: { headline: string; subHeadline: string }) {
+  return (
+    <>
+      <h1 className="relative text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.15] mb-4 drop-shadow-2xl">
+        {headline}
+      </h1>
+
+      <p className="relative text-white/90 text-sm md:text-base lg:text-lg font-medium leading-relaxed max-w-[600px] drop-shadow-lg mb-2">
+        {subHeadline}
+      </p>
+    </>
+  );
+}
+
+function LearnMoreButton() {
+  return (
+    <Link
+      href="#about"
+      className="group relative inline-flex items-center w-fit bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-base mt-6 hover:bg-white/20 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10"
+    >
+      <span className="relative z-10">Learn About Us</span>
+      <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2} />
+    </Link>
+  );
+}
+
+function SlideIndicators({ active, total, onSelect }: { active: number; total: number; onSelect: (index: number) => void }) {
+  return (
+    <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      {Array.from({ length: total }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => onSelect(index)}
+          aria-label={`Go to slide ${index + 1}`}
+          className={`h-1.5 rounded-full transition-all duration-500 ${
+            active === index 
+              ? 'w-12 bg-white shadow-lg shadow-white/30' 
+              : 'w-8 bg-white/40 hover:bg-white/60'
+          }`}
+        />
+      ))}
+    </div>
   );
 }
