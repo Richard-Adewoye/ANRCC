@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const tabs = [
   {
@@ -12,7 +13,7 @@ const tabs = [
     description:
       "ANRCCC has partnered with governments and international organizations to design and implement REDD+ programs, focusing on reducing deforestation and forest degradation in key biodiversity hotspots.",
     link: "/case-studies/southern-california",
-    images: ["images/img_1.webp", "images/img_2.webp", "images/img_3.jpg"],
+    images: ["/images/img_1.webp", "/images/img_2.webp", "/images/img_3.jpg"],
   },
   {
     id: "sustainable-agriculture",
@@ -22,7 +23,7 @@ const tabs = [
     description:
       "The firm has led efforts to promote climate-smart agricultural practices that increase productivity while building resilience to climate change for smallholder farmers.",
     link: "/case-studies/the-joint",
-    images: ["images/img_4.jpg", "images/img_5.jpg", "images/img_6.jpg"],
+    images: ["/images/img_4.jpg", "/images/img_5.jpg", "/images/img_6.jpg"],
   },
   {
     id: "solar-energy-optimization",
@@ -32,7 +33,7 @@ const tabs = [
     description:
       "ANRCCC has worked on comprehensive water management plans that balance the needs of agricultural, urban, and industrial sectors while ensuring the sustainability of water resources.",
     link: "/case-studies/wrexham-stadium",
-    images: ["images/img_7.jpg", "images/img_8.jpg", "images/img_9.jpg"],
+    images: ["/images/img_7.jpg", "/images/img_8.jpg", "/images/img_9.jpg"],
   },
 ];
 
@@ -42,7 +43,6 @@ export default function CaseStudiesSection() {
   return (
     <section id="projects" className="bg-[#1D1D1D] text-white py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
-        {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-green-200">
           Approach
         </h2>
@@ -50,7 +50,6 @@ export default function CaseStudiesSection() {
           ANRCCC’s approach is rooted in collaboration, innovation, and sustainability. The firm works closely with stakeholders across Africa to co-create solutions that are locally relevant, culturally appropriate, and environmentally sustainable. By integrating scientific research, traditional knowledge, and advanced technology, ANRCCC ensures that its solutions are both effective and scalable.
         </p>
 
-        {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-6 border-b border-green-700 mb-10">
           {tabs.map((tab) => (
             <button
@@ -67,7 +66,6 @@ export default function CaseStudiesSection() {
           ))}
         </div>
 
-        {/* Tab Content */}
         <TabContent tab={activeTab} />
       </div>
     </section>
@@ -82,21 +80,24 @@ function TabContent({ tab }: { tab: Tab }) {
       {/* Left Column - Image Collage */}
       <div className="relative w-full h-80 flex gap-2">
         {tab.images.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt=""
-            className="w-1/3 object-cover rounded-lg"
-          />
+          <div key={index} className="relative w-1/3 h-full rounded-lg overflow-hidden">
+            <Image
+              src={src}
+              alt={`Case study image ${index + 1}`}
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-cover"
+              priority={index === 0}
+            />
+          </div>
         ))}
-        </div>
+      </div>
 
       {/* Right Column - Text Content */}
       <div>
         <span className="text-xs uppercase text-green-400">{tab.category}</span>
         <h3 className="text-2xl font-bold mt-2 mb-4 text-green-200">{tab.title}</h3>
         <p className="text-green-300 mb-6">{tab.description}</p>
-        
       </div>
     </div>
   );
