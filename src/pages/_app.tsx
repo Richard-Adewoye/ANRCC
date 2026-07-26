@@ -1,3 +1,4 @@
+// Provide a minimal local AppProps type to avoid depending on next/app types
 type AppProps = {
   Component: any;
   pageProps: any;

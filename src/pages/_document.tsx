@@ -1,4 +1,4 @@
-// @ts-ignore: next types not found in this environment
+// @ts-ignore
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
