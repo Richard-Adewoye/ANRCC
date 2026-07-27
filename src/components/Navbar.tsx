@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X, Search, Globe, User, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
@@ -21,7 +20,7 @@ export default function Navbar() {
   const serviceLinks = [
     { label: "Natural Resource Management", href: "/services/NaturalResourceManagement" },
     { label: "Climate Change Consulting", href: "/services/ClimateChangeConsulting" },
-    { label: "Environmental Impact Assessments", href: "/services/EnvironmentalImapctAssessments" },
+    { label: "Environmental Impact Assessments", href: "/services/EnvironmentalImpactAssessments" },
     { label: "Sustainable Agriculture and Land Use", href: "/services/SustainableAgricultureAndLandUse" },
     { label: "Capacity Building and Training", href: "/services/CapacityBuildingAndTraining" },
     { label: "Policy and Advocacy", href: "/services/PolicyAndAdvocacy" },
