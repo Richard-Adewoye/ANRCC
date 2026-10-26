@@ -7,10 +7,13 @@ export default function Footer() {
     <footer className="bg-black text-green-200 py-6">
       <div className="max-w-screen-xl mx-auto px-6 text-center space-y-2">
         <p className="text-sm">
-          <strong>Headquarters:</strong> 26 Old Lamingo Road, Nabor, Jos, Plateau State.
+          <strong>Abuja Office:</strong> Suite 4 Iwande House Yauri Street, Off Jere Street, Behind Rita Lori Hotel, Abuja
+        </p>
+         <p className="text-sm">
+          <strong>Lagos Office:</strong>No. 4 Jolly Star Close, off Allen Avenue. Ikeja
         </p>
         <p className="text-sm">
-          <strong>Phone:</strong> +234 80 69420 985
+          <strong>Phone:</strong> +2348033661741
         </p>
         <p className="text-sm">
           <strong>Email:</strong> <Link href="mailto:info@anrccc.com" className="hover:text-green-400">info@anrccc.com</Link>
