@@ -1,5 +1,4 @@
 import InfoCard from "./InfoCard"
-import Image from "next/image";
 
 export default function InfoCardsSection() {
   return (
