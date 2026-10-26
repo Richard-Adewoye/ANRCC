@@ -28,16 +28,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-8 h-8 flex items-center justify-center bg-green-800 text-green-200 rounded hover:bg-green-700 transition"
-    >
-      {icon}
-    </Link>
-  );
-}
